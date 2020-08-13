@@ -11,18 +11,27 @@ function setAttributes(el, attrs) {
       el.setAttribute(key, attrs[key]);
     }
   }
+  function addData(chart, label, data) {
+    chart.data.labels = label;
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data = data;
+    });
+    chart.update();
+}
 const liveData = fetch('https://canvasjs.com/services/data/datapoints.php');
-
 liveData.then(response => response.json())
-    .then(data => {
-        let dataArray = [];
-        data.forEach(element => {
-            dataArray.push(element[1]);
+.then(data => {
+    
+    let dataArray = [];
+    let lableArray = [];
+        data.forEach(value => {
+            dataArray.push({x: value[0], y: parseInt(value[1])});
+            lableArray.push(value[0]);
         });
-        var myChart = new Chart(ctx, {
+        let myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: lableArray,
                 datasets: [{
                     label: '# Crime statistics',
                     type: 'line',
@@ -57,6 +66,24 @@ liveData.then(response => response.json())
                 }
             }
         });
-        console.log(data);
-        
+        console.log(myChart);
+        updateChart();
+        function updateChart() {
+            //debugger;
+            let liveData = fetch("https://canvasjs.com/services/data/datapoints.php?xstart=" + (dataArray.length + 1) + "&ystart=" + (dataArray[dataArray.length - 1].y) + "&length=1&type=json");
+            liveData.then(response => response.json()).then(data => {
+                data.forEach(value => {
+                    dataArray.push({
+                        x: parseInt(value[0]),
+                        y: parseInt(value[1])
+                    });
+                    lableArray.push(value[0]);
+                });
+                
+            }); 
+            addData(myChart, lableArray, dataArray);
+            console.log(dataArray);
+              
+            setTimeout(function(){updateChart()}, 1000);
+            }
     });
