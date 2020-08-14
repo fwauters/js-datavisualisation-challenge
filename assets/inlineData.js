@@ -4,7 +4,14 @@ function getCountries(id, start) {
     let countries = [];
     let tableRows = document.getElementById(id).rows;
     for (let i = start; i < tableRows.length; i++) {
-        countries.push(tableRows[i].cells[1].innerHTML);
+        let elem = tableRows[i].cells[1].innerHTML;
+        if (elem.includes("<br>") === true) {
+            let newElem = elem.replace("<br>", "").replace(/\s+/g," ");;
+            countries.push(newElem);
+        }
+        else {
+            countries.push(elem);
+        }
     }
     return countries;
 }
@@ -63,7 +70,7 @@ let crimeChart = new Chart(chartOne, {
             label: 2002,
             data: sortData("table1", 2)[0],
             borderWidth : "1",
-            borderColor: "#1abc9c",
+            borderColor: "#008900",
             backgroundColor: "rgba(0,0,0,0)"
         }, {
             label: 2003,
@@ -111,31 +118,42 @@ let crimeChart = new Chart(chartOne, {
             label: 2010,
             data: sortData("table1", 2)[8],
             borderWidth : "1",
-            borderColor: "#ff7675",
+            borderColor: "#d83290",
             backgroundColor: "rgba(0,0,0,0)"
         }, {
             label: 2011,
             data: sortData("table1", 2)[9],
             borderWidth : "1",
-            borderColor: "#00b894",
+            borderColor: "#642a02",
             backgroundColor: "rgba(0,0,0,0)"
         }, {
             label: 2012,
             data: sortData("table1", 2)[10],
             borderWidth : "1",
-            borderColor: "#0984e3",
+            borderColor: "#111e97",
             backgroundColor: "rgba(0,0,0,0)"
         }]
     },
     options: {
         title: {
             display: true,
-            text: "THIS IS A TITLE"
+            text: "Offences recoreded by the police from 2002 to 2012"
         },
         legend: {
             labels: {
                 boxWidth: 20
             }
+        },
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: "Number in thousands",
+                    padding: {
+                        bottom: 20
+                    }
+                }
+            }]
         }
     }
 });
@@ -159,15 +177,27 @@ let prisonChart = new Chart(chartTwo, {
         datasets: [{
             label: "2007-09",
             data: sortData("table2", 1)[1],
-            borderWidth : "1",
-            borderColor: "#1abc9c",
-            backgroundColor: "green"
+            backgroundColor: "#307824"
         }, {
             label: "2010-12",
             data: sortData("table2", 1)[2],
-            borderWidth : "1",
-            borderColor: "#9b59b6",
-            backgroundColor: "purple"
+            backgroundColor: "#87538d"
         }]},
-    options : {}
+    options : {
+        title: {
+            display: true,
+            text: "Average prison population in 2007-09 and 2010-12"
+        },
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: "Average / 100.000 inhabitants",
+                    padding: {
+                        bottom: 20
+                    }
+                }
+            }]
+        }
+    }
 });
