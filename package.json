@@ -1,0 +1,23 @@
+{
+  "name": "js-datavisualisation-challenge",
+  "version": "1.0.0",
+  "description": "Javascript Challenge : Data Visualisation",
+  "main": "index.html",
+  "dependencies": {
+    "tui-chart": "^3.11.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fwauters/js-datavisualisation-challenge.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fwauters/js-datavisualisation-challenge/issues"
+  },
+  "homepage": "https://github.com/fwauters/js-datavisualisation-challenge#readme"
+}
