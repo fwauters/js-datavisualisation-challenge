@@ -2,7 +2,7 @@ let header1 = document.getElementsByTagName("h1")[0];
 
 let canvasCart = document.createElement("canvas");
 
-setAttributes(canvasCart, {"id": "liveDataCart", "width": "400", "height": "400"});
+setAttributes(canvasCart, {"id": "liveDataCart"});
 header1.parentNode.insertBefore(canvasCart, header1.nextSibling);
 let ctx = document.getElementById('liveDataCart').getContext('2d');
 
@@ -46,12 +46,7 @@ liveData.then(response => response.json())
                         'rgba(255, 159, 64, 0.2)'
                     ],
                     borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
+                        'rgba(0, 0, 255, 1)'
                     ],
                     borderWidth: 1
                 }]
